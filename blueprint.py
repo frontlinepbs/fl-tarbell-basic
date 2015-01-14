@@ -111,21 +111,29 @@ def drop_cap(text):
     return Markup(content)
 
 
-@blueprint.app_template_filter()
-def format_date(value, format='%b. %d, %Y', convert_tz=None):
-    """
-    Format a date.
-    """
-    if isinstance(value, float) or isinstance(value, int):
-        seconds = (value - 25569) * 86400.0
-        parsed = datetime.datetime.utcfromtimestamp(seconds)
-    else:
-        parsed = dateutil.parser.parse(value)
-    if convert_tz:
-        local_zone = dateutil.tz.gettz(convert_tz)
-        parsed = parsed.astimezone(tz=local_zone)
+@blueprint.app_template_filter('date')
+def date_format(s, format=None):
+    "Parse and format date string or Excel serial date"
 
-    return parsed.strftime(format)
+    # handle Excel serial dates
+    if isinstance(s, (int, float)):
+        tt = xlrd.xldate_as_tuple(s, 0) # 1900-based
+        date = datetime.datetime(*tt)
+
+    # handle strings of various kinds
+    elif isinstance(s, basestring):
+        date = dateutil.parser.parse(s)
+
+    # if it's already a date, just move on
+    elif isinstance(s, (datetime.datetime, datetime.date)):
+        date = s
+    
+    # format if we have a format
+    if format is not None:
+        return date.strftime(format)
+    
+    return date
+
 
 @blueprint.app_template_filter()
 def strong_to_b(value):
