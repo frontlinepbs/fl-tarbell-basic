@@ -1,6 +1,17 @@
-body { padding-top: 50px; }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Oswald', 'Lucida Grande', 'Arial';
+}
 
-.social-menu>li>a {
-  font-size: 24px;
-  padding: 11px 0;
+body,
+p {
+    font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
+}
+
+textarea.embed {
+    cursor: text !important;
 }
