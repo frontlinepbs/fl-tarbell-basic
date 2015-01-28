@@ -9,10 +9,10 @@
             <h1>Embed</h1>
             <label for="frontline">For Frontline:</label>
             <textarea name="frontline" cols="20" rows="8" class="form-control">
-<div id="putin-embed"></div>
+<div id="{{ name }}-embed"></div>
 <script src="http://{{ BUCKETS.production }}/bower_components/pym.js/dist/pym.min.js"></script>
 <script>
-var pymParent = new pym.Parent('putin-embed', 'http://{{ BUCKETS.production }}/');
+var pymParent = new pym.Parent('{{ name }}-embed', 'http://{{ BUCKETS.production }}/');
 pymParent.iframe.onload = function() {
     pymParent.sendMessage('is_frontline', true);
 }
