@@ -9,6 +9,7 @@ import markdown as Markdown
 import os
 import re
 import requests
+import xlrd
 
 from clint.textui import colored, puts
 from flask import Blueprint
@@ -125,14 +126,38 @@ def date_format(s, format=None):
         date = dateutil.parser.parse(s)
 
     # if it's already a date, just move on
-    elif isinstance(s, (datetime.datetime, datetime.date)):
+    else:
         date = s
+
+    # if it's still not really a date, return whatever it was
+    if not isinstance(date, (datetime.datetime, datetime.date)):
+        return s
     
     # format if we have a format
     if format is not None:
         return date.strftime(format)
     
     return date
+
+
+@blueprint.app_template_filter('parse_dates')
+def date_format_list(items, *attributes, **kwargs):
+    """
+    Run date_format on a list of dicts
+    """
+    format = kwargs.pop('format', None)
+    for item in items:
+        if attributes:
+            # setitem on attributes
+            for attr in attributes:
+                item[attr] = date_format(item[attr], format)
+
+            # yield back the full item
+            yield item
+
+        else:
+            # if it's just a list of dates, yield back the whole thing
+            yield date_format(item, format)
 
 
 @blueprint.app_template_filter()
