@@ -1,12 +1,24 @@
 {% extends "_base.html" %}
 
+{% block nav %}{% endblock %}
+
 {% block content %}
-<div class="container">
-  <div class="jumbotron">
-    <h1>Welcome to your new project!</h1>
-    <p>Replace this message with your own content in <code>{{ PROJECT_PATH }}/index.html</code>.</p>
-    <p>Learn more on the <a href="_example.html">example page</a>.</p>
-  </div>
+<header class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1>{{ title }}</h1>
+			<p class="deck text-muted">
+				{{ deck|safe }}
+			</p>
+		</div>
+	</div>
+</header>
+
+<div class="content container">
+	<div class="row">
+		<div class="col-xs-12"></div>
+	</div>
 </div>
+
 {% endblock content %}
 
