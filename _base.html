@@ -67,6 +67,12 @@
   {% include "_footer.html" %}
 {% endblock footer %}
 
+{% block modal_include %}
+<div class="modal fade" id="embed-modal">
+    {% include "_modal.html" %}
+</div>
+{% endblock modal_include %}
+
 {% block library_scripts %}
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>

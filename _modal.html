@@ -1,0 +1,16 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Embed this</h4>
+        </div>
+        <div class="modal-body">
+            <label for="embed">Copy the code below:</label>
+            <textarea name="embed" cols="30" rows="3" class="form-control embed" readonly>
+<div data-pym-src="http://{{ BUCKETS.production }}/"></div>
+<script src="http://{{ BUCKETS.production }}/bower_components/pym.js/dist/pym.min.js"></script></textarea>
+            <p class="help-block">The embedded graphic should adapt to fit most page sizes, including mobile.</p>
+        </div>
+        {# <div class="modal-footer text-muted"></div> #}
+    </div>
+</div>
